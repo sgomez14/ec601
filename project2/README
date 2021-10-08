@@ -1,1 +1,19 @@
 This is the README for Project2
+
+For this project I used the Twitter API to retrieve tweets from local Bostonians that tweet about restaurants in Boston and the Greater Boston area.
+
+These tweets are then processed by the Google NLP API which accesses them for positive language about restaurants.
+
+The results of the Google NLP processing are saved to a JSON.
+
+I then had to manually edit the JSON files to add information about the restaurant's address and latitude and longitude. 
+
+This JSON file is then loaded by foodMap.py, which uses the Folium Mapping AP to mark all the tweets on a map.
+
+After running the foodMap.py, a user can click on the different waypoint markings to see what was tweeted about that restaurant.
+
+Clicking on a waypoint allows a user to see the restaurant's address, website, and the contents of the tweet.
+
+To run foodMap.py, download this foloder and be sure to have the folium map library installed on your computer.
+
+You can find instructions for downloading folium at https://python-visualization.github.io/folium/.
