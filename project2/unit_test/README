@@ -1,1 +1,13 @@
 README for Unit Test
+
+My original functions for my project only has one function in my Twitter API file and the main function in my Google NLP file. 
+
+I decided to test that both of these APIs returned outputs that were not empty. 
+- If the Twitter API returned an empty JSON, then my Google NLP script would fail.
+- If my Google NLP script did not properly create the JSON with filtered restaurant tweets,
+  then my mapping application would fail.
+  
+ My mapping script (foodMap.py) does not  have functions that I created. Therefore, I did not write a unit test for it.
+ This is a consequence of not making my mapping script moduler.
+ In a future iteration of my mapping application, I would break down key code blocks into their own functions.
+  
