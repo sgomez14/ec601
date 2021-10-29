@@ -6,42 +6,51 @@ import os
 
 from twitterAPI import getTweets
 
-# grab the tweets that were retrieved with the twitterAPI
-tweets = getTweets()
-# print(tweets)
+def main():
+    # grab the tweets that were retrieved with the twitterAPI
+    tweets = getTweets()
+    # print(tweets)
 
-# establishing credentials
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'G:\My Drive\Grad School\Fall 2021\EC601 Product Design\Project2\deep-cascade-327600-a660ac53ac83.json'
+    # establishing credentials
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'G:\My Drive\Grad School\Fall 2021\EC601 Product Design\Project2\deep-cascade-327600-a660ac53ac83.json'
 
-# Instantiates a client
-client = language_v1.LanguageServiceClient()
+    # Instantiates a client
+    client = language_v1.LanguageServiceClient()
 
-# nlp thresholds
-score_threshold = .2
-magnitude_threshold = .3
+    # nlp thresholds
+    score_threshold = .2
+    magnitude_threshold = .3
 
-# variable to store the nlp results
-nlp_results = {"data": []}
+    # variable to store the nlp results
+    nlp_results = {"data": []}
 
-# process each tweet and save results to json
-with open("tweets_nlp.json", "w") as nlp_file:
+    # variable for json file that will be created
+    json_file = "tweets_nlp_testing.json"
 
-    for tweet in tweets:
-        # The text to analyze
-        text = tweet["text"]
+    # process each tweet and save results to json
+    with open(json_file, "w") as nlp_file:
 
-        document = language_v1.Document(content=text, type_=language_v1.Document.Type.PLAIN_TEXT)
+        for tweet in tweets:
+            # The text to analyze
+            text = tweet["text"]
 
-        # Detects the sentiment of the text
-        sentiment = client.analyze_sentiment(request={'document': document}).document_sentiment
+            document = language_v1.Document(content=text, type_=language_v1.Document.Type.PLAIN_TEXT)
 
-        if sentiment.score >= score_threshold and sentiment.magnitude >= magnitude_threshold:
-            nlp_results["data"].append(tweet)
-        # nlp_file.write("Text: {}".format(text) + "\n")
-        # nlp_file.write("Sentiment: {}, {}".format(sentiment.score, sentiment.magnitude) + "\n\n")
+            # Detects the sentiment of the text
+            sentiment = client.analyze_sentiment(request={'document': document}).document_sentiment
 
-    # write JSON file
-    nlp_file.write(json.dumps(nlp_results, indent=4))
+            if sentiment.score >= score_threshold and sentiment.magnitude >= magnitude_threshold:
+                nlp_results["data"].append(tweet)
+            # nlp_file.write("Text: {}".format(text) + "\n")
+            # nlp_file.write("Sentiment: {}, {}".format(sentiment.score, sentiment.magnitude) + "\n\n")
 
-#print("Text: {}".format(text))
-#print("Sentiment: {}, {}".format(sentiment.score, sentiment.magnitude))
+        # write JSON file
+        nlp_file.write(json.dumps(nlp_results, indent=4))
+
+    #print("Text: {}".format(text))
+    #print("Sentiment: {}, {}".format(sentiment.score, sentiment.magnitude))
+
+    return json_file
+
+if __name__ == "__main__":
+    main()
