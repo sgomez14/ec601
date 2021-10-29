@@ -17,3 +17,14 @@ Clicking on a waypoint allows a user to see the restaurant's address, website, a
 To run foodMap.py, download this foloder and be sure to have the folium map library installed on your computer.
 
 You can find instructions for downloading folium at https://python-visualization.github.io/folium/.
+
+
+MVP:
+- an interactive map with waypoints indicating tweets about a restaurant at the location
+- clicking on waypoint displays window with restaurant name, address, tweet, and restaurant website
+
+User Stories:
+- user can easily zoom in and out of the map
+- user can click on restaurant website link
+
+
